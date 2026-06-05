@@ -3,17 +3,21 @@
     <item
         android:id="@+id/nav_home"
         android:icon="@android:drawable/ic_menu_today"
-        android:title="Beranda"/>
+        android:title="Beranda" />
     <item
         android:id="@+id/nav_transaction"
+        android:icon="@android:drawable/ic_menu_recent_history"
+        android:title="Transaksi" />
+    <item
+        android:id="@+id/nav_add"
         android:icon="@android:drawable/ic_input_add"
-        android:title="Transaksi"/>
+        android:title="" />
     <item
-        android:id="@+id/nav_report"
+        android:id="@+id/nav_summary"
         android:icon="@android:drawable/ic_menu_report_image"
-        android:title="Summary"/>
+        android:title="Summary" />
     <item
-        android:id="@+id/nav_profile"
+        android:id="@+id/nav_ai"
         android:icon="@android:drawable/ic_menu_help"
-        android:title="Tanya AI"/>
+        android:title="Tanya AI" />
 </menu>

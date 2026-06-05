@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.PocketFlow" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">#1B4332</item>
-        <item name="colorPrimaryVariant">#081C15</item>
+        <item name="colorPrimary">#5B4FCF</item>
+        <item name="colorPrimaryVariant">#4B3FA0</item>
         <item name="colorOnPrimary">#FFFFFF</item>
-        <item name="colorSecondary">#52B788</item>
-        <item name="colorSecondaryVariant">#2D6A4F</item>
+        <item name="colorSecondary">#9C88FF</item>
+        <item name="colorSecondaryVariant">#6C5CE7</item>
         <item name="colorOnSecondary">#FFFFFF</item>
-        <item name="android:statusBarColor">#1B4332</item>
+        <item name="android:statusBarColor">#4B3FA0</item>
         <item name="android:navigationBarColor">#FFFFFF</item>
+    </style>
+
+    <style name="Theme.PocketFlow.NoActionBar" parent="Theme.PocketFlow">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.PocketFlow.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#5B4FCF</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_owl_icon</item>
+        <item name="postSplashScreenTheme">@style/Theme.PocketFlow.NoActionBar</item>
     </style>
 </resources>

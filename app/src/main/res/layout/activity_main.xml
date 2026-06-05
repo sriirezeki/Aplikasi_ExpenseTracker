@@ -1,163 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
     android:orientation="vertical">
 
-    <!-- HEADER with gradient -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/gradient_header"
-        android:orientation="vertical"
-        android:paddingStart="20dp"
-        android:paddingTop="48dp"
-        android:paddingEnd="20dp"
-        android:paddingBottom="24dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvGreeting"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Selamat pagi"
-                    android:textColor="#C8C0FF"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tvUserName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Nama"
-                    android:textColor="#FFFFFF"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <!-- Avatar circle -->
-            <TextView
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:background="@drawable/circle_avatar"
-                android:gravity="center"
-                android:text="N"
-                android:textColor="#5B4FCF"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="Total Saldo"
-            android:textColor="#C8C0FF"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/tvTotalBalance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="Rp 0"
-            android:textColor="#FFFFFF"
-            android:textSize="34sp"
-            android:textStyle="bold" />
-
-        <!-- Income & Expense Cards -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                android:background="@drawable/card_income"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:gravity="center_vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@android:drawable/arrow_up_float"
-                        android:drawablePadding="4dp"
-                        android:text="Pemasukan"
-                        android:textColor="#4CAF50"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tvTotalIncome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rp 0"
-                        android:textColor="#FFFFFF"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/card_expense"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:gravity="center_vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@android:drawable/arrow_down_float"
-                        android:drawablePadding="4dp"
-                        android:text="Pengeluaran"
-                        android:textColor="#F44336"
-                        android:textSize="12sp" />
-
-                    <TextView
-                        android:id="@+id/tvTotalExpense"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Rp 0"
-                        android:textColor="#FFFFFF"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- BODY -->
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
@@ -165,176 +15,361 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:orientation="vertical">
 
-            <!-- Quick Menu -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="Menu Cepat"
-                android:textColor="#1A1A2E"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+            <!-- PURPLE HEADER — card lives inside it, hangs off bottom via padding -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="320dp">
 
+                <!-- Header Ungu -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="260dp"
+                    android:background="@drawable/gradient_header"
+                    android:orientation="vertical"
+                    android:paddingStart="16dp"
+                    android:paddingTop="48dp"
+                    android:paddingEnd="16dp">
+
+                    <!-- Greeting row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvGreeting"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Selamat pagi"
+                                android:textColor="#C8C0FF"
+                                android:textSize="13sp"/>
+
+                            <TextView
+                                android:id="@+id/tvUserName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="PocketFlow"
+                                android:textColor="#FFFFFF"
+                                android:textSize="22sp"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            app:cardCornerRadius="21dp"
+                            app:cardElevation="0dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/owl_logo"/>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="Total Saldo"
+                        android:textColor="#C8C0FF"
+                        android:textSize="13sp"/>
+
+                    <TextView
+                        android:id="@+id/tvTotalBalance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Rp 0"
+                        android:textColor="#FFFFFF"
+                        android:textSize="34sp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+                <!-- Floating Card -->
+                <LinearLayout
+                    android:id="@+id/cardIncomeExpense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_white_card"
+                    android:elevation="16dp"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <!-- PEMASUKAN -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_purple_light_card"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🟢 Pemasukan"
+                            android:textColor="#4CAF50"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tvTotalIncome"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Rp 0"
+                            android:textColor="#1A1A2E"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                    <!-- PENGELUARAN -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_purple_light_card"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🔴 Pengeluaran"
+                            android:textColor="#F44336"
+                            android:textSize="12sp"/>
+
+                        <TextView
+                            android:id="@+id/tvTotalExpense"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Rp 0"
+                            android:textColor="#1A1A2E"
+                            android:textStyle="bold"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <!-- BODY: paddingTop makes room for the card hanging down -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:background="#F5F5F5">
 
+                <!-- BUDGET CARD -->
                 <LinearLayout
-                    android:id="@+id/menuTambah"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/card_menu"
-                    android:gravity="center"
+                    android:layout_marginBottom="12dp"
+                    android:background="@drawable/bg_white_card"
+                    android:elevation="2dp"
                     android:orientation="vertical"
-                    android:padding="12dp">
+                    android:padding="16dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="➕"
-                        android:textSize="24sp" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="6dp"
+                            android:text="💰"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvBudgetTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Budget Bulan Ini"
+                            android:textColor="#1A1A2E"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvBudgetEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Atur"
+                            android:textColor="#5B4FCF"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvBudgetUsed"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Rp 0"
+                            android:textColor="#F44336"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvBudgetLimit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="/ Rp 0"
+                            android:textColor="#888888"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:id="@+id/frameProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/bg_budget_progress_track">
+
+                        <View
+                            android:id="@+id/viewBudgetProgress"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_budget_progress_fill" />
+                    </FrameLayout>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvBudgetPercent"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Tambah"
-                        android:textColor="#444444"
+                        android:gravity="end"
+                        android:text="Budget belum diatur"
+                        android:textColor="#888888"
                         android:textSize="11sp" />
                 </LinearLayout>
 
+                <!-- AI INSIGHT CARD -->
                 <LinearLayout
-                    android:id="@+id/menuLaporan"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/card_menu"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_purple_light_card"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="📊"
-                        android:textSize="24sp" />
+                        android:layout_marginEnd="10dp"
+                        android:text="🤖"
+                        android:textSize="20sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tvAiInsight"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Laporan"
-                        android:textColor="#444444"
-                        android:textSize="11sp" />
+                        android:layout_weight="1"
+                        android:text="Menganalisis pola pengeluaran kamu..."
+                        android:textColor="#5B4FCF"
+                        android:textSize="12sp" />
                 </LinearLayout>
 
+                <!-- DAILY BAR CHART -->
                 <LinearLayout
-                    android:id="@+id/menuKategori"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginEnd="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/card_menu"
-                    android:gravity="center"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/bg_white_card"
+                    android:elevation="2dp"
                     android:orientation="vertical"
-                    android:padding="12dp">
+                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="📂"
-                        android:textSize="24sp" />
+                        android:layout_marginBottom="12dp"
+                        android:text="Pengeluaran Harian"
+                        android:textColor="#1A1A2E"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Kategori"
-                        android:textColor="#444444"
-                        android:textSize="11sp" />
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/barChartDaily"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp" />
                 </LinearLayout>
 
+                <!-- RECENT TRANSACTIONS -->
                 <LinearLayout
-                    android:id="@+id/menuBudget"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/card_menu"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="💰"
-                        android:textSize="24sp" />
+                        android:layout_weight="1"
+                        android:text="Transaksi Terbaru"
+                        android:textColor="#1A1A2E"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvSeeAll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Budget"
-                        android:textColor="#444444"
-                        android:textSize="11sp" />
+                        android:text="Lihat semua →"
+                        android:textColor="#5B4FCF"
+                        android:textSize="12sp" />
                 </LinearLayout>
-            </LinearLayout>
-
-            <!-- Recent Transactions -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:id="@+id/tvEmpty"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Transaksi Terbaru"
-                    android:textColor="#1A1A2E"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
+                    android:gravity="center"
+                    android:padding="32dp"
+                    android:text="Belum ada transaksi.\nTekan ➕ untuk mulai mencatat."
+                    android:textColor="#888888"
+                    android:textSize="13sp" />
 
-                <TextView
-                    android:id="@+id/tvSeeAll"
-                    android:layout_width="wrap_content"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTransactions"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lihat semua"
-                    android:textColor="#5B4FCF"
-                    android:textSize="12sp" />
+                    android:nestedScrollingEnabled="false" />
+
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvEmpty"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="32dp"
-                android:text="Belum ada transaksi.\nTekan ➕ untuk mulai mencatat."
-                android:textColor="#888888"
-                android:textSize="13sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvTransactions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
-
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <!-- BOTTOM NAV -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -342,7 +377,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        app:itemIconTint="#5B4FCF"
+        android:elevation="8dp"
+        app:itemIconTint="@null"
         app:itemTextColor="#5B4FCF"
         app:menu="@menu/bottom_nav_menu" />
 
