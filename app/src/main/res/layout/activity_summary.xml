@@ -1,57 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
     android:orientation="vertical">
 
-    <!-- HEADER -->
+    <!-- HEADER: purple gradient -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gradient_header"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:paddingStart="16dp"
         android:paddingTop="48dp"
         android:paddingEnd="16dp"
         android:paddingBottom="20dp">
 
-        <TextView
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingEnd="12dp"
-            android:text="←"
-            android:textColor="#FFFFFF"
-            android:textSize="22sp" />
-
+        <!-- Month navigation -->
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/btnPrevMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ringkasan"
+                android:padding="8dp"
+                android:text="‹"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tvMonthYear"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tvMonth"
+                android:id="@+id/btnNextMonth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#C8C0FF"
-                android:textSize="12sp" />
+                android:padding="8dp"
+                android:text="›"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
         </LinearLayout>
+
+        <!-- Total expense label + amount -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="Total pengeluaran bulan ini"
+            android:textColor="#C8C0FF"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tvHeaderExpense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="Rp 0"
+            android:textColor="#FFFFFF"
+            android:textSize="32sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,123 +86,127 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Total Expense Card -->
+            <!-- Income / Expense cards -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/gradient_header"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total Pengeluaran Bulan Ini"
-                    android:textColor="#C8C0FF"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tvTotalExpense"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="Rp 0"
-                    android:textColor="#FFFFFF"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
-
-                <!-- Income vs Expense -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_white_card"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:text="🟢 Pemasukan"
+                        android:textColor="#4CAF50"
+                        android:textSize="12sp" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pemasukan"
-                            android:textColor="#C8C0FF"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:id="@+id/tvTotalIncome"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp 0"
-                            android:textColor="#4CAF50"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <TextView
+                        android:id="@+id/tvMonthIncome"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_marginTop="4dp"
+                        android:text="Rp 0"
+                        android:textColor="#1A1A2E"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pengeluaran"
-                            android:textColor="#C8C0FF"
-                            android:textSize="12sp" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_white_card"
+                    android:elevation="2dp"
+                    android:orientation="vertical"
+                    android:padding="12dp">
 
-                        <TextView
-                            android:id="@+id/tvTotalExpense2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Rp 0"
-                            android:textColor="#F44336"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🔴 Pengeluaran"
+                        android:textColor="#F44336"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvMonthExpense"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Rp 0"
+                        android:textColor="#1A1A2E"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Pie Chart -->
+            <!-- Pie chart + legend side by side -->
             <LinearLayout
+                android:id="@+id/layoutPieCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/card_menu"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:background="@drawable/bg_white_card"
+                android:elevation="2dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
+                    android:padding="16dp"
                     android:text="Pengeluaran per Kategori"
                     android:textColor="#1A1A2E"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
-                <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/pieChart"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="220dp" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="16dp"
+                    android:gravity="center_vertical">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pieChart"
+                        android:layout_width="0dp"
+                        android:layout_height="180dp"
+                        android:layout_weight="1" />
+
+                    <LinearLayout
+                        android:id="@+id/legendContainer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingStart="12dp"
+                        android:gravity="center_vertical" />
+                </LinearLayout>
             </LinearLayout>
 
-            <!-- Category Breakdown -->
+            <!-- Category detail list -->
             <LinearLayout
+                android:id="@+id/layoutCategoryCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/card_menu"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:background="@drawable/bg_white_card"
+                android:elevation="2dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
+                    android:padding="16dp"
                     android:text="Detail per Kategori"
                     android:textColor="#1A1A2E"
                     android:textSize="14sp"
@@ -188,6 +219,30 @@
                     android:nestedScrollingEnabled="false" />
             </LinearLayout>
 
+            <!-- Empty state -->
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="48dp"
+                android:text="Belum ada data transaksi\nuntuk bulan ini."
+                android:textColor="#888888"
+                android:textSize="14sp"
+                android:visibility="gone" />
+
         </LinearLayout>
     </ScrollView>
+
+    <!-- BOTTOM NAV -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        app:itemIconTint="@null"
+        app:itemTextColor="#5B4FCF"
+        app:menu="@menu/bottom_nav_menu" />
+
 </LinearLayout>
