@@ -178,7 +178,9 @@ class MainActivity : AppCompatActivity() {
             } else {
                 tvEmpty.visibility = View.GONE
                 rvTransactions.visibility = View.VISIBLE
-                rvTransactions.adapter = TransactionAdapter(list.take(5)) {}
+                rvTransactions.adapter = TransactionAdapter(
+                    list.take(5).map { TransactionAdapter.TransactionListItem.Item(it) }
+                ) {}
             }
 
             setupDailyChart(barChart, list)

@@ -11,71 +11,99 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class TransactionAdapter(
-    private var transactions: List<Transaction>,
+    private var items: List<TransactionListItem>,
     private val onLongClick: (Transaction) -> Unit
-) : RecyclerView.Adapter<TransactionAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    sealed class TransactionListItem {
+        data class Header(val label: String) : TransactionListItem()
+        data class Item(val transaction: Transaction) : TransactionListItem()
+    }
+
+    companion object {
+        private const val TYPE_HEADER = 0
+        private const val TYPE_TRANSACTION = 1
+    }
+
+    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val tvDateHeader: TextView = view.findViewById(R.id.tvDateHeader)
+    }
+
+    class TransactionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvIcon: TextView = view.findViewById(R.id.tvIcon)
-        val tvCategory: TextView = view.findViewById(R.id.tvCategory)
         val tvNote: TextView = view.findViewById(R.id.tvNote)
-        val tvDate: TextView = view.findViewById(R.id.tvDate)
+        val tvCategoryTime: TextView = view.findViewById(R.id.tvCategoryTime)
         val tvAmount: TextView = view.findViewById(R.id.tvAmount)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_transaction, parent, false)
-        return ViewHolder(view)
+    override fun getItemViewType(position: Int) = when (items[position]) {
+        is TransactionListItem.Header -> TYPE_HEADER
+        is TransactionListItem.Item -> TYPE_TRANSACTION
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val t = transactions[position]
-
-        holder.tvIcon.text = categoryIcon(t.category)
-        holder.tvCategory.text = t.category
-        holder.tvNote.text = if (t.note.isEmpty()) t.category else t.note
-        holder.tvDate.text = formatDate(t.date)
-
-        val amount = formatRupiah(t.amount)
-        if (t.type == "INCOME") {
-            holder.tvAmount.text = "+$amount"
-            holder.tvAmount.setTextColor(0xFF4CAF50.toInt())
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == TYPE_HEADER) {
+            HeaderViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_date_header, parent, false)
+            )
         } else {
-            holder.tvAmount.text = "-$amount"
-            holder.tvAmount.setTextColor(0xFFF44336.toInt())
-        }
-
-        holder.itemView.setOnLongClickListener {
-            onLongClick(t)
-            true
+            TransactionViewHolder(
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.item_transaction, parent, false)
+            )
         }
     }
 
-    override fun getItemCount() = transactions.size
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (val item = items[position]) {
+            is TransactionListItem.Header -> (holder as HeaderViewHolder).tvDateHeader.text = item.label
+            is TransactionListItem.Item -> {
+                val t = item.transaction
+                holder as TransactionViewHolder
+                holder.tvIcon.text = categoryIcon(t.category)
+                holder.tvNote.text = if (t.note.isNotEmpty()) t.note else t.category
+                holder.tvCategoryTime.text = "${t.category} · ${formatTime(t.date)}"
+                val amount = formatRupiah(t.amount)
+                if (t.type == "INCOME") {
+                    holder.tvAmount.text = "+$amount"
+                    holder.tvAmount.setTextColor(0xFF4CAF50.toInt())
+                } else {
+                    holder.tvAmount.text = "-$amount"
+                    holder.tvAmount.setTextColor(0xFFF44336.toInt())
+                }
+                holder.itemView.setOnLongClickListener {
+                    onLongClick(t)
+                    true
+                }
+            }
+        }
+    }
 
-    fun updateList(newList: List<Transaction>) {
-        transactions = newList
+    override fun getItemCount() = items.size
+
+    fun updateList(newItems: List<TransactionListItem>) {
+        items = newItems
         notifyDataSetChanged()
     }
 
-    private fun categoryIcon(category: String): String {
-        return when (category) {
-            "Makanan" -> "🍔"
-            "Transportasi" -> "🚗"
-            "Belanja" -> "🛍️"
-            "Tagihan" -> "💡"
-            "Kesehatan" -> "💊"
-            "Edukasi" -> "📚"
-            "Hiburan" -> "🎮"
-            else -> "💰"
-        }
+    private fun categoryIcon(category: String) = when (category) {
+        "Makanan" -> "🍔"
+        "Transportasi" -> "🚗"
+        "Belanja" -> "🛍️"
+        "Tagihan" -> "💡"
+        "Kesehatan" -> "💊"
+        "Edukasi" -> "📚"
+        "Hiburan" -> "🎮"
+        "Gaji" -> "💼"
+        "Bonus" -> "🎁"
+        "Investasi" -> "📈"
+        "Freelance" -> "💻"
+        else -> "💰"
     }
 
-    private fun formatDate(timestamp: Long): String {
-        val sdf = SimpleDateFormat("dd MMM yyyy · HH:mm", Locale("id", "ID"))
-        return sdf.format(Date(timestamp))
-    }
+    private fun formatTime(timestamp: Long): String =
+        SimpleDateFormat("HH:mm", Locale("id", "ID")).format(Date(timestamp))
 
     private fun formatRupiah(amount: Long): String {
         val format = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
