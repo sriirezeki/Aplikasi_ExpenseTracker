@@ -15,7 +15,7 @@
         android:theme="@style/Theme.PocketFlow" >
 
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.PocketFlow.Splash" >
             <intent-filter>
@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".MainActivity" android:theme="@style/Theme.PocketFlow.NoActionBar" />
         <activity android:name=".TransactionActivity" android:theme="@style/Theme.PocketFlow.NoActionBar" />
         <activity android:name=".AddTransactionActivity" android:theme="@style/Theme.PocketFlow.NoActionBar" />
         <activity android:name=".SummaryActivity" android:theme="@style/Theme.PocketFlow.NoActionBar" />

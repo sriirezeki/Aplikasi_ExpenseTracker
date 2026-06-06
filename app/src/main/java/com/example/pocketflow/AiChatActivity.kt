@@ -1,17 +1,18 @@
 package com.example.pocketflow
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pocketflow.viewmodel.TransactionViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -48,28 +49,65 @@ class AiChatActivity : AppCompatActivity() {
         // Welcome message
         addAiMessage("Halo! Saya Pocket AI. Tanyakan apapun tentang keuangan kamu — saya akan bantu menganalisis pengeluaran dan memberi saran. 💜")
 
+        val layoutChips = findViewById<View>(R.id.layoutChips)
+
+        fun sendChip(text: String) {
+            layoutChips.visibility = View.GONE
+            addUserMessage(text)
+            sendToGemini(text, rvChat)
+        }
+
+        findViewById<TextView>(R.id.chipAnalisa).setOnClickListener {
+            sendChip("Analisa pengeluaran saya dan berikan insight yang berguna")
+        }
+        findViewById<TextView>(R.id.chipTips).setOnClickListener {
+            sendChip("Berikan tips menghemat uang berdasarkan pola pengeluaran saya")
+        }
+        findViewById<TextView>(R.id.chipBulanIni).setOnClickListener {
+            sendChip("Berapa total pengeluaran saya dan apa kategori terbesar?")
+        }
+        findViewById<TextView>(R.id.chipSaldo).setOnClickListener {
+            sendChip("Bagaimana kondisi keuangan saya? Apakah sudah sehat?")
+        }
+
         btnSend.setOnClickListener {
             val message = etMessage.text.toString().trim()
             if (message.isEmpty()) return@setOnClickListener
-
-            // Check if data is loaded
-            val income = viewModel.totalIncome.value ?: 0L
-            val expense = viewModel.totalExpense.value ?: 0L
-
+            layoutChips.visibility = View.GONE
             etMessage.text.clear()
             addUserMessage(message)
+            sendToGemini(message, rvChat)
+        }
 
-            if (income == 0L && expense == 0L) {
-                // Data might not be loaded yet, wait briefly
-                viewModel.transactions.observe(this) { list ->
-                    if (list.isNotEmpty() || income > 0 || expense > 0) {
-                        sendToGemini(message, rvChat)
-                    } else {
-                        sendToGemini(message, rvChat)
-                    }
+        setupBottomNav()
+    }
+
+    private fun setupBottomNav() {
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomNav.selectedItemId = R.id.nav_ai
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, MainActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    true
                 }
-            } else {
-                sendToGemini(message, rvChat)
+                R.id.nav_transaction -> {
+                    startActivity(Intent(this, TransactionActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    true
+                }
+                R.id.nav_add -> {
+                    startActivity(Intent(this, AddTransactionActivity::class.java))
+                    true
+                }
+                R.id.nav_summary -> {
+                    startActivity(Intent(this, SummaryActivity::class.java))
+                    overridePendingTransition(0, 0)
+                    true
+                }
+                R.id.nav_ai -> true
+                else -> false
             }
         }
     }

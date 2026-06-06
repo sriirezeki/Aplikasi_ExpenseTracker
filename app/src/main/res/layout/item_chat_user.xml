@@ -4,15 +4,20 @@
     android:layout_height="wrap_content"
     android:gravity="end"
     android:orientation="horizontal"
-    android:padding="4dp">
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
 
     <TextView
         android:id="@+id/tvMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:background="@drawable/gradient_header"
+        android:layout_marginStart="64dp"
+        android:background="@drawable/bg_chat_user"
+        android:lineSpacingExtra="2dp"
         android:padding="12dp"
         android:textColor="#FFFFFF"
         android:textSize="14sp" />
+
 </LinearLayout>

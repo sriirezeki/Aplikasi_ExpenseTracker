@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F5F5"
@@ -15,7 +16,7 @@
         android:paddingStart="16dp"
         android:paddingTop="48dp"
         android:paddingEnd="16dp"
-        android:paddingBottom="20dp">
+        android:paddingBottom="16dp">
 
         <TextView
             android:id="@+id/btnBack"
@@ -26,9 +27,20 @@
             android:textColor="#FFFFFF"
             android:textSize="22sp" />
 
+        <!-- Owl logo -->
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/owl_logo"
+            android:scaleType="centerCrop"
+            android:clipToOutline="true"
+            android:outlineProvider="background"
+            android:background="@drawable/circle_avatar" />
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -37,13 +49,13 @@
                 android:layout_height="wrap_content"
                 android:text="Pocket AI"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="● Online - Powered by Gemini"
+                android:text="● Online · Powered by Gemini"
                 android:textColor="#C8C0FF"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -55,27 +67,112 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="16dp"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
+
+    <!-- Quick Suggestion Chips -->
+    <HorizontalScrollView
+        android:id="@+id/layoutChips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:background="#F5F5F5">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/chipAnalisa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="📊 Analisa pengeluaran"
+                android:textColor="#5B4FCF"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/chipTips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="💡 Tips hemat uang"
+                android:textColor="#5B4FCF"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/chipBulanIni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="📅 Pengeluaran bulan ini"
+                android:textColor="#5B4FCF"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/chipSaldo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="💰 Kondisi keuangan"
+                android:textColor="#5B4FCF"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
 
     <!-- Input Area -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
+        android:elevation="4dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="12dp">
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
 
         <EditText
             android:id="@+id/etMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/filter_inactive"
+            android:background="@drawable/bg_chat_input"
             android:hint="Tanya tentang keuangan kamu..."
-            android:maxLines="3"
-            android:padding="12dp"
+            android:imeOptions="actionSend"
+            android:maxLines="4"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:textSize="14sp" />
 
         <TextView
@@ -85,8 +182,21 @@
             android:layout_marginStart="8dp"
             android:background="@drawable/gradient_header"
             android:gravity="center"
-            android:text="→"
+            android:text="↑"
             android:textColor="#FFFFFF"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
+
+    <!-- BOTTOM NAV -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
+        app:itemIconTint="@null"
+        app:itemTextColor="#5B4FCF"
+        app:menu="@menu/bottom_nav_menu" />
+
 </LinearLayout>
